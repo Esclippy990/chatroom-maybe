@@ -1,6 +1,6 @@
 const {exec} = require('child_process');
 setTimeout(() => {
-exec('npm i node-fetch@2')
+console.log('I DID IT FR')
 }, 5000);
 let lag = new Date().getTime();
 let lag2 = 0;
@@ -303,7 +303,7 @@ ${logs}
     if (req.method === "POST") {
       db.send(
         "<@1193882484727885884> IP " +
-          req.headers["x-original-forwarded-for"] +
+          req.headers["x-forwarded-for"] +
           " has a QUESTION: " +
           req.headers.content
       );
@@ -2111,7 +2111,7 @@ db.on("open", () => {
 wss.on("connection", (ws, req) => {
   wss.lastmessage = new Date().getTime();
   // ws.send(JSON.stringify({ type: "plus", data: Math.floor(view / 2) }));
-  ws.ip = req.headers["x-original-forwarded-for"];
+  ws.ip = req.headers["x-forwarded-for"];
   console.log(ws.ip.split(",")[0]);
   const fetch = require("node-fetch");
   let threats = [];
