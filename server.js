@@ -2006,9 +2006,12 @@ document.getElementById('e').oninput = () => {
 });
 
 // --- WebSocket Server ---
-const wss = new WebSocket.Server({ server, maxPayload: 1000 * 1024 * 1024 });
+const wss = new WebSocket.Server({ server, 
+                                  maxPayload: 500 * 1024 * 1024 
+                                 });
 let websockets = [];
 let clientCount = 0;
+let storage = 0;
 let messages = [];
 let mutedIPS = [];
 let names = [];
@@ -2453,6 +2456,13 @@ wss.on("connection", (ws, req) => {
               })
             );
           }
+        } else if (command.startsWith("storage")) {
+          ws.send(
+            JSON.stringify({
+              type: "html",
+              data: `<b>Storage space</b>: <span style="user-select: all">The current file storage is <u>${storage} MB</u></span>.`,
+            })
+          );
         } else if (command.startsWith("lag")) {
           ws.send(
             JSON.stringify({
@@ -3056,6 +3066,7 @@ whom: "mod",
     } catch (error) {
       broadcast("new file!");
       files[newFileID].data = msg;
+      storage += files[newFileID].data / (1024*1024)
       console.log(newFileID + " THIS IS THE ID");
       console.log("broadcasting itttt");
       /*broadcast(
