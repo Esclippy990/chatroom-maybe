@@ -2006,7 +2006,7 @@ document.getElementById('e').oninput = () => {
 });
 
 // --- WebSocket Server ---
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server, maxPayload: 1000 * 1024 * 1024 });
 let websockets = [];
 let clientCount = 0;
 let messages = [];
