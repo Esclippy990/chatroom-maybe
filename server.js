@@ -2460,7 +2460,7 @@ wss.on("connection", (ws, req) => {
           ws.send(
             JSON.stringify({
               type: "html",
-              data: `<b>Storage space</b>: <span style="user-select: all">The current file storage is <u>${storage} MB</u></span>.`,
+              data: `<b>Storage space</b>: <span style="user-select: all">The current file storage is <u>${storage.toFixed(2)} MB</u></span>.`,
             })
           );
         } else if (command.startsWith("lag")) {
@@ -3066,7 +3066,7 @@ whom: "mod",
     } catch (error) {
       broadcast("new file!");
       files[newFileID].data = msg;
-      storage += files[newFileID].data / (1024*1024)
+      storage += files[newFileID].data.length / (1024*1024)
       console.log(newFileID + " THIS IS THE ID");
       console.log("broadcasting itttt");
       /*broadcast(
