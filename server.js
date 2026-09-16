@@ -40,7 +40,6 @@ let views = require("./views.js");
 let mess = require("./messages.js");
 let questions = ``;
 let logs = ``;
-const { exec } = require("child_process");
 exec;
 let users = [];
 let db = new WebSocket("http://de1.bot-hosting.net:20558");
