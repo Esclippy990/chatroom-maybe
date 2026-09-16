@@ -2152,7 +2152,7 @@ wss.on("connection", (ws, req) => {
           <td>Detected as an unsafe ip.</td>
           </tr>`;
           console.log("e");
-          ws.pause();
+          //ws.pause();
           threats.push(ws.ip);
         } else {
           console.log("o");
@@ -2162,7 +2162,7 @@ wss.on("connection", (ws, req) => {
   }
   if (threats.includes(ws.ip.split(",")[0])) {
     console.log("ea");
-    ws.pause();
+    //ws.pause();
     threats.push(ws.ip);
   }
   if (IPs.includes(ws.ip.split(",")[0])) {
@@ -2181,7 +2181,7 @@ wss.on("connection", (ws, req) => {
   }
   if (mutedIPS.includes(ws.ip)) {
     ws.send(JSON.stringify({ type: "mute" }));
-    ws.pause();
+    //ws.pause();
     ws.muted = true;
     ws.send(
       JSON.stringify({
