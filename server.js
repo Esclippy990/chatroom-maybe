@@ -2110,7 +2110,7 @@ wss.on("connection", (ws, req) => {
   // ws.send(JSON.stringify({ type: "plus", data: Math.floor(view / 2) }));
   ws.ip = req.headers["x-original-forwarded-for"];
   console.log(ws.ip.split(",")[0]);
-  const fetch = require("node-fetch");
+  /*const fetch = require("node-fetch");
   let threats = [];
   let IPs = [];
   if (
