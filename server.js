@@ -920,7 +920,7 @@ ${b === 11 ? "snow(true)" : ""}
     })*/
     console.log('YES')
     //let k = URL.createObjectURL(m)
-    let k = 'https://chatroom-toz6.onrender.com//file:'+fileID
+    let k = 'https://chatroom-toz6.onrender.com/file:'+fileID
     let img;
   if (thing.includes('video')) {
   img = document.createElement('video');
