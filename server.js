@@ -47,7 +47,7 @@ function dbs() {
 let dab = new WebSocket("ws://fi11.bot-hosting.net:20604/");
 dab.on('open', () => {
 setInterval(() => {
-dab.send("ping");
+dab.send(JSON.stringify({ type: "ping" }));
 }, 5000);
 })
 dab.on('close', () => {
