@@ -42,7 +42,17 @@ let questions = ``;
 let logs = ``;
 exec;
 let users = [];
+function dbs() {
 let db = new WebSocket("http://de1.bot-hosting.net:20558");
+db.on('open', () => {
+setInterval(() => {
+db.send("ping");
+}, 5000);
+})
+db.on('close', () => {
+dbs()
+})
+}
 let view;
 let updateCount = () => {};
 let startTime = new Date();
@@ -301,12 +311,12 @@ ${logs}
     </body>`);
   } else if (req.url === "/submit") {
     if (req.method === "POST") {
-      db.send(
+      /*db.send(
         "<@1193882484727885884> IP " +
           req.headers["x-forwarded-for"] +
           " has a QUESTION: " +
           req.headers.content
-      );
+      );*/
       questions += `
       ${questions.length > 0 ? "<hr></sub></details>" : ""}
       <details>
@@ -952,7 +962,7 @@ if (thing.includes('video') || thing.includes('audio')) {
   img.onerror = () => {
     let form = thing.split('/')[0]
   ab.innerText = 'Unable to play '+form
-  img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
+  //img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
   }
   img.onloadeddata = () => {
     ab.innerText = thename;
@@ -1730,7 +1740,7 @@ document.getElementById('chat').scrollTo(document.getElementById('chat').scrollX
     img.onerror = () => {
       let form = thing.split('/')[0]
     ab.innerText = 'Unable to play '+form
-    img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
+   // img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
     }
     img.onloadeddata = () => {
       ab.innerText = thename;
@@ -2283,9 +2293,9 @@ wss.on("connection", (ws, req) => {
                 names.length,
             })
           );
-          db.send(
+         /* db.send(
             `**${ws.name} has joined the chat! Total users: ${names.length}**`
-          );
+          );*/
           ws.lastmessage = Date.now() - 100;
           ws.mute = 20;
           ws.messages = [];
@@ -2540,11 +2550,11 @@ wss.on("connection", (ws, req) => {
                     ` seconds. Reason: ${reason ? reason : "Unspecified."}`,
                 })
               );
-              db.send(
+             /* db.send(
                 `**${ws.name} has been muted for ${duration} seconds. Reason: ${
                   reason ? reason : "Unspecified."
                 }**`
-              );
+              );*/
               logs += `<tr>
           <td>${ws.name}</td>
           <td>${ws.ip}</td>
@@ -2739,9 +2749,9 @@ wss.on("connection", (ws, req) => {
                   " seconds. Reason: Potential spam.",
               })
             );
-            db.send(
+            /*db.send(
               `**${ws.name} has been muted for ${ws.mute} seconds. Reason: Potential spam.**`
-            );
+            );*/
             logs += `<tr>
           <td>${ws.name}</td>
           <td>${ws.ip}</td>
@@ -2834,9 +2844,9 @@ whom: "mod",
                       " seconds. Reason: Slurring/Offensive language.",
                   })
                 );
-                db.send(
+               /* db.send(
                   `**${ws.name} has been muted for ${ws.mute} seconds. Reason: Slurring/Offensive language.**`
-                );
+                );*/
                 ws.muted = true;
                 ws.send(
                   JSON.stringify({
@@ -2857,11 +2867,11 @@ whom: "mod",
             }
             if (slurdetected === false) {
               let id = String(Math.random()).substring(2);
-              db.send(
+            /*  db.send(
                 `**${ws.name}**: ${dat.data
                   .replaceAll("\n", "")
                   .substring(0, 75)}`
-              );
+              );*/
               ws.messages.push(id);
               if (dat.emb) {
                 broadcast(
@@ -3128,7 +3138,7 @@ whom: "mod",
             names.length,
         })
       );
-      db.send(`**${ws.name} has left the chat! Total users: ${names.length}**`);
+     // db.send(`**${ws.name} has left the chat! Total users: ${names.length}**`);
       logs += `<tr>
           <td>${ws.name}</td>
           <td>${ws.ip}</td>
