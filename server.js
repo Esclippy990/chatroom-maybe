@@ -131,9 +131,9 @@ setInterval(() => {
 }, 1000);*/
 view = views.views;
 const fs = require("fs");
-process.on("uncaughtException", () => {
+/*process.on("uncaughtException", () => {
   console.log("error!");
-});
+});*/
 let videothing = "";
 let files = {};
 let ids = [];
