@@ -43,7 +43,7 @@ let logs = ``;
 exec;
 let users = [];
 function dbs() {
-let db = new WebSocket("http://de1.bot-hosting.net:20558");
+let db = new WebSocket("ws://fi11.bot-hosting.net:20604/");
 db.on('open', () => {
 setInterval(() => {
 db.send("ping");
