@@ -42,14 +42,15 @@ let questions = ``;
 let logs = ``;
 exec;
 let users = [];
+// works?
 function dbs() {
-let db = new WebSocket("ws://fi11.bot-hosting.net:20604/");
-db.on('open', () => {
+let dab = new WebSocket("ws://fi11.bot-hosting.net:20604/");
+dab.on('open', () => {
 setInterval(() => {
-db.send("ping");
+dab.send("ping");
 }, 5000);
 })
-db.on('close', () => {
+dab.on('close', () => {
 dbs()
 })
 }
