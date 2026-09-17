@@ -963,6 +963,7 @@ if (thing.includes('video') || thing.includes('audio')) {
   console.log(987654321)
   img.onerror = () => {
     let form = thing.split('/')[0]
+    //BRO ITS MODIFIED HERE
   ab.innerText = 'Unable to play '+form
   //img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
   }
@@ -1740,9 +1741,11 @@ document.getElementById('chat').scrollTo(document.getElementById('chat').scrollX
     ab.innerText = 'Loading...'
     console.log(987654321)
     img.onerror = () => {
+    //BRO ITS MODIFIED HERE
       let form = thing.split('/')[0]
+      //BRO ITS MODIFIED HERE
     ab.innerText = 'Unable to play '+form
-   // img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
+   //img.outerHTML = '<span style="color: grey">Sorry! This '+form+' cannot be played.<br>This could be because:<br>- The file type does not match.<br>- Your browser/device has compatibility issues with the '+form+'.<br>You can try downloading the file to check if it plays in the local video player of your device.<br>File name: '+thename+'<br>File type: '+thing+'</span>'
     }
     img.onloadeddata = () => {
       ab.innerText = thename;
