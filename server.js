@@ -53,6 +53,7 @@ db.on('close', () => {
 dbs()
 })
 }
+dbs()
 let view;
 let updateCount = () => {};
 let startTime = new Date();
