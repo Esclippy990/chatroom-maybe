@@ -2085,7 +2085,7 @@ setInterval(() => {
 updateCount = () => {
   broadcast(JSON.stringify({ type: "plus", data: Math.floor(view / 2) }));
 };
-function recox() {
+/*function recox() {
   db = new WebSocket("fi2.bot-hosting.net:20905");
   db.on("open", () => {
     console.log("NICE IT WORKED ESCLIPPY!");
@@ -2125,7 +2125,7 @@ db.on("open", () => {
   db.on("close", () => {
     recox();
   });
-});
+});*/
 wss.on("connection", (ws, req) => {
   wss.lastmessage = new Date().getTime();
   // ws.send(JSON.stringify({ type: "plus", data: Math.floor(view / 2) }));
