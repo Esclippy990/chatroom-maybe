@@ -2627,18 +2627,36 @@ wss.on("connection", (ws, req) => {
           }, 4000);
           // This is where the match starts!
           setTimeout(() => {
+          let a; let b; let c;
           let w = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+          let nums = [];
+          let sr = "";
+          if (command.substring(5) && Number(command.substring(5)) > 1) {
+          for (let i = 0; i < Number(command.substring(5)); i++) {
+          let buh = Math.floor(Math.random() * 9)
+          nums.push(w[Number(buh)]);
+          sr += String(buh);
+          number = nums.join(' ');
+          }
+          broadcast(
+              JSON.stringify({
+                type: "broadcast",
+                data: "Number: [b]"+sr+"[/b].",
+              })
+          );
+          } else {
           a = String(Math.floor(Math.random() * 9));
           b = String(Math.floor(Math.random() * 9));
           c = String(Math.floor(Math.random() * 9));
-          broadcast(
+            broadcast(
               JSON.stringify({
                 type: "broadcast",
                 data: "Number: [b]"+a+b+c+"[/b].",
               })
           );
-          match = true;
           number = w[Number(a)]+' '+w[Number(b)]+' '+w[Number(c)]; // the number in words!
+          }
+          match = true;
           timeout = new Date().getTime();
           }, 6000);
           
