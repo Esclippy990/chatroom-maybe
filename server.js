@@ -142,7 +142,7 @@ const server = http.createServer((req, res) => {
   let sn = new Date();
   let a = sn.getDate();
   let b = sn.getMonth();
-  if (req.url.startsWith('/alive') {
+  if (req.url.startsWith('/alive')) {
   res.end('YES BRO IM ALIVE')
   } else if (req.url.startsWith("/file:")) {
     // CREDITS TO GEMINI FOR HELPING ME FIX THE FORWARD-SCRUBBING ISSUE.
