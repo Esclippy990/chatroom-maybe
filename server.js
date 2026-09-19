@@ -144,8 +144,7 @@ const server = http.createServer((req, res) => {
   let b = sn.getMonth();
   if (req.url.startsWith('/alive') {
   res.end('YES BRO IM ALIVE')
-  }
-  if (req.url.startsWith("/file:")) {
+  } else if (req.url.startsWith("/file:")) {
     // CREDITS TO GEMINI FOR HELPING ME FIX THE FORWARD-SCRUBBING ISSUE.
     const fileKey = req.url.substring(6);
     const file = files[fileKey];
