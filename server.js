@@ -2023,9 +2023,13 @@ document.getElementById('e').oninput = () => {
 });
 
 // --- WebSocket Server ---
-const wss = new WebSocket.Server({ server, 
-                                  maxPayload: 500 * 1024 * 1024 
-                                 });
+const wss = new WebSocket.Server({ 
+  server, 
+maxPayload: 500 * 1024 * 1024 
+});
+let match = false;
+let number = "";
+let timeout = "";
 let websockets = [];
 let clientCount = 0;
 let storage = 0;
@@ -2598,6 +2602,46 @@ wss.on("connection", (ws, req) => {
               type: "scream",
             })
           );
+        } else if (command.startsWith("race")) {
+        broadcast(
+              JSON.stringify({
+                type: "broadcast",
+                data: ws.name + " has started a number match!",
+              })
+          )
+          setTimeout(() => {
+          broadcast(
+              JSON.stringify({
+                type: "broadcast",
+                data: "Type out the number in words as fast as you can.",
+              })
+          )
+          }, 2000);
+          setTimeout(() => {
+          broadcast(
+              JSON.stringify({
+                type: "broadcast",
+                data: "3.. 2... 1.... GO!",
+              })
+          )
+          }, 4000);
+          // This is where the match starts!
+          setTimeout(() => {
+          let w = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+          a = String(Math.floor(Math.random() * 9));
+          b = String(Math.floor(Math.random() * 9));
+          c = String(Math.floor(Math.random() * 9));
+          broadcast(
+              JSON.stringify({
+                type: "broadcast",
+                data: "Number: [b]"+a+b+c+"[/b].",
+              })
+          );
+          match = true;
+          number = w[Number(a)]+' '+w[Number(b)]+' '+w[Number(c)]; // the number in words!
+          timeout = new Date().getTime();
+          }, 6000);
+          
         } else if (command.startsWith("rolldice")) {
           // /rolldice 5
           let dicesides = Number(command.substring(9));
@@ -2874,6 +2918,23 @@ whom: "mod",
             }
             if (slurdetected === false) {
               let id = String(Math.random()).substring(2);
+              if (match === true) { // Check if a match is happening
+              if (dat.data.includes(number)) {
+              // YEA BOIIII WE GOT A WINNER LESGOOOO!!! :3
+              setTimeout(() => {
+              match = false;
+              broadcast(
+              JSON.stringify({
+                type: "broadcast",
+                data: ws.name + " has WON the match, by typing the number in "+(Date.now() - timeout) / 1000+" seconds!",
+              })
+          )
+                // wtf someone won the match?! time to wind up fr...
+                timeout = "";
+                number = "";
+              }, 10); // delay so both messages don't overlap each other!
+              }
+              }
             /*  db.send(
                 `**${ws.name}**: ${dat.data
                   .replaceAll("\n", "")
