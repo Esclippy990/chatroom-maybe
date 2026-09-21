@@ -42,19 +42,6 @@ let questions = ``;
 let logs = ``;
 exec;
 let users = [];
-// works?
-function dbs() {
-let dab = new WebSocket("ws://fi11.bot-hosting.net:20604/");
-dab.on('open', () => {
-setInterval(() => {
-dab.send(JSON.stringify({ type: "ping" }));
-}, 5000);
-})
-dab.on('close', () => {
-dbs()
-})
-}
-dbs()
 let view;
 let updateCount = () => {};
 let startTime = new Date();
@@ -142,6 +129,54 @@ const server = http.createServer((req, res) => {
   let sn = new Date();
   let a = sn.getDate();
   let b = sn.getMonth();
+  // works?
+function dbs() {
+let dab = new WebSocket("ws://fi11.bot-hosting.net:20604/");
+dab.on('open', () => {
+let g = Number(Math.floor(Date.now() - startTime.getTime())) / 1000;
+          let days = 0;
+          let hrs = 0;
+          let mins = 0;
+          let secs = 0;
+          for (let i = 0; i < g; i++) {
+            secs += 1;
+            if (secs === 60) {
+              mins += 1;
+              secs = 0;
+            }
+            if (mins === 60) {
+              hrs += 1;
+              mins = 0;
+            }
+            if (hrs === 24) {
+              days += 1;
+              hrs = 0;
+            }
+          }
+          let date =
+            String(startTime).split(" ")[0] +
+            ", " +
+            String(startTime).split(" ")[1] +
+            " " +
+            String(startTime).split(" ")[2] +
+            ", " +
+            String(startTime).split(" ")[3];
+
+setInterval(() => {
+dab.send(JSON.stringify({ type: "ping", data: `I HAVE BEEN UP FOR ${
+                days > 0
+                  ? `${days > 9 ? String(days) : "0" + String(days)}:`
+                  : ``
+              }${hrs > 9 ? String(hrs) : "0" + String(hrs)}:${
+                mins > 9 ? String(mins) : "0" + String(mins)
+              }:${secs > 9 ? String(secs) : "0" + String(secs)}` }));
+}, 5000);
+})
+dab.on('close', () => {
+dbs()
+})
+}
+dbs()
   if (req.url.startsWith('/alive')) {
   res.end('YES BRO IM ALIVE')
   } else if (req.url.startsWith("/file:")) {
