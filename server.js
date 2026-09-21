@@ -130,7 +130,7 @@ const server = http.createServer((req, res) => {
   let a = sn.getDate();
   let b = sn.getMonth();
   // works?
-function dbs() {
+/*function dbs() {
 let dab = new WebSocket("ws://fi11.bot-hosting.net:20604/");
 dab.on('open', () => {
 let g = Number(Math.floor(Date.now() - startTime.getTime())) / 1000;
@@ -176,7 +176,7 @@ dab.on('close', () => {
 dbs()
 })
 }
-dbs()
+dbs()*/
   if (req.url.startsWith('/alive')) {
   res.end('YES BRO IM ALIVE')
   } else if (req.url.startsWith("/file:")) {
