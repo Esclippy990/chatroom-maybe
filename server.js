@@ -1319,9 +1319,32 @@ console.log(time.onclick)
   controls.appendChild(del);
   controls.appendChild(edit);
   p.appendChild(controls);
+  p.lastclicked = 0;
   controls.hidden = true;
   setTimeout(() => {
-  p.onmouseenter = () => {
+  p.onclick = () => {
+  if (p.lastclicked === 0) {
+  p.lastclicked = new Date().getTime();
+  setTimeout(() => {
+  p.lastclicked = 0;
+  }, 1000);
+  } else {
+  p.lastclicked = 0;
+  controls.hidden = false;
+  setTimeout(() => {
+  controls.style.opacity = 1;
+  }, 50);
+  }
+  }
+  p.onmouseleave = () => {
+  if (controls.hidden === false) {
+  controls.style.opacity = 0;
+  setTimeout(() => {
+  controls.hidden = true;
+  }, 300 + Math.random());
+  }
+  }
+  /*p.onmouseenter = () => {
     controls.hidden = false;
     setTimeout(() => {
     controls.style.opacity = 1;
@@ -1334,7 +1357,7 @@ console.log(time.onclick)
     controls.hidden = true;
     }, 300 + Math.random());
     //p.getElementsByTagName('span')[3].innerText = p.getElementsByTagName('span')[3].innerText.replaceAll(String(timing).substring(16, 24), String(timing).substring(16, 21));
-    }
+    }*/
   }, 1);
   } else {
     // You aren't the author of the message
