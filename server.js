@@ -522,6 +522,7 @@ ${logs}
   body {
   font-family: sans-serif;
   overflow-x: 'hidden';
+  user-select: none;
   }${
     b === 11
       ? `
