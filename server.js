@@ -1379,11 +1379,19 @@ console.log(time.onclick)
 
     controls.appendChild(reply);
     controls.hidden = true;
-    p.onmouseenter = () => {
+    p.lastclicked = 0;
+    p.onclick = () => {
+    if (p.lastclicked === 0) {
+    p.lastclicked = new Date().getTime();
+  setTimeout(() => {
+  p.lastclicked = 0;
+  }, 1000);
+      } else {
       controls.hidden = false;
       setTimeout(() => {
       controls.style.opacity = 1;
       }, 50);
+      }
     }
     p.onmouseleave = () => {
       controls.style.opacity = 0;
