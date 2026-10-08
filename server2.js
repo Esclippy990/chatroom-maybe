@@ -3254,6 +3254,6 @@ whom: "mod",
 });
 
 // Start server
-server.listen(8080, () => {
+server.listen(process.env.PORT || 8080, "0.0.0.0", () => {
   console.log("HTTP + WS server running on http://localhost:8080");
 });
