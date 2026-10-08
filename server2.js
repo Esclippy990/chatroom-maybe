@@ -1,5 +1,6 @@
 const {exec} = require('child_process');
 setTimeout(() => {
+exec('npm i ws http node-fetch@2')
 console.log('I DID IT FR')
 }, 5000);
 let lag = new Date().getTime();
